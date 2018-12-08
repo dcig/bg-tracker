@@ -1,0 +1,2 @@
+class GlucoseReading < ApplicationRecord
+end
