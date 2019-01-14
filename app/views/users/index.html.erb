@@ -1,0 +1,19 @@
+
+<h1>User Information</h1>
+ <%= link_to 'New User', new_user_path %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Delivery Method</th>
+    <th></th>
+  </tr>
+ 
+  <% @user.each do |user| %>
+    <tr>
+      <td><%= user.first_name %></td>
+      <td><%= user.first_name %></td>
+      <td><%= user.text %></td>
+      <td><%= link_to 'Show', article_path(user) %></td>
+    </tr>
+  <% end %>
+</table>
