@@ -3,7 +3,7 @@
 
 <%= form_with scope: :users, url: users_path, local: true do |form| %>
   <p>
-    <%= form.label :first_Name %><br>
+    <%= form.label :first_name %><br>
     <%= form.text_field :first_name %><br>
     <%= form.label :last_name %><br>
     <%= form.text_field :last_name %>
@@ -19,5 +19,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Your Dexcom Data', https://sandox-api.dexcom.com/v2/oauth2/login?client_id=Z1EZfUJo2AcPFbm9ex58CC3gvM46UQEt&redirect_uri=https://www.gigitracker.com/users/new/&response_type=code&scope=offline_access&state={your_state_value} %>
+<%= link_to 'Your Dexcom Data', "https://sandox-api.dexcom.com/v2/oauth2/login?client_id=Z1EZfUJo2AcPFbm9ex58CC3gvM46UQEt&redirect_uri=https://www.gigitracker.com/users/new/&response_type=code&scope=offline_access&state={your_state_value}" %>
 <%= link_to 'Back', users_path %>
