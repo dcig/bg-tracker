@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181208204945) do
+ActiveRecord::Schema.define(version: 20190224230256) do
 
   create_table "glucose_readings", force: :cascade do |t|
     t.integer "bg_value"
