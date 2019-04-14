@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190224230256) do
+ActiveRecord::Schema.define(version: 20190414172717) do
 
   create_table "glucose_readings", force: :cascade do |t|
-    t.integer "bg_value"
+    t.float "bg_value"
     t.time "time_stamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "pump_inputs", force: :cascade do |t|
-    t.integer "amount"
+    t.float "amount"
     t.time "time_stamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

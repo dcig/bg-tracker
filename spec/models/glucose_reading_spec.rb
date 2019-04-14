@@ -18,7 +18,7 @@ RSpec.describe GlucoseReading do
     it "does not truncate a decimal" do
       glucose_reading = GlucoseReading.create!({ bg_value: "9.78", time_stamp: "11:00"})
 
-      expect(glucose_reading.bg_value).to eq(9)
+      expect(glucose_reading.bg_value).to eq(9.78)
     end
   end
 end
