@@ -5,6 +5,8 @@ RSpec.describe PumpInput do
     pump_input = PumpInput.new({ amount: "2.2", time_stamp: "11:00"})
     pump_input.save!
 
+    expect(pump_input.amount).to eq(2.2)
+
     expect(pump_input).to be_persisted
   end
 end  
