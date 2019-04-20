@@ -1,7 +1,25 @@
 <h1>New Account</h1>
+<strong>Here you will enter your basic information that the app needs for baseline tracking.</strong>
 
+<p>The app is designed to be user friendly with minimal interaction. It analyzes your blood sugar trends over time and looks for patterns. <br>
+These can be the default patterns or ones set by you. Once the app sees a pattern it starts to look at your sleep and health data. <br>
+These are then the insights that are provided to you. If you have good or bad blood sugars, what other than the obvious could be helping you? </p>
 
 <%= form_with scope: :users, url: users_path, local: true do |form| %>
+ <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@user.errors.count, "error") %> prohibited
+        this user from being saved:
+      </h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
   <p>
     <%= form.label :first_name %><br>
     <%= form.text_field :first_name %><br>
@@ -19,5 +37,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Your Dexcom Data', "https://sandox-api.dexcom.com/v2/oauth2/login?client_id=Z1EZfUJo2AcPFbm9ex58CC3gvM46UQEt&redirect_uri=https://www.gigitracker.com/users/new/&response_type=code&scope=offline_access&state={your_state_value}" %>
-<%= link_to 'Back', users_path %>
+<%= link_to 'Click Here to Sync Your Dexcom Data', "https://sandox-api.dexcom.com/v2/oauth2/login?client_id=Z1EZfUJo2AcPFbm9ex58CC3gvM46UQEt&redirect_uri=https://www.gigitracker.com/users/new/&response_type=code&scope=offline_access&state={your_state_value}" %>
+<%= link_to 'Back to The Dashboard', users_path %>

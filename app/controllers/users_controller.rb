@@ -8,19 +8,31 @@ class UsersController < ApplicationController
     end
 
     def new
+        @user = User.new
     end
 
     def edit
+        @user = User.find(params[:id])
     end
 
     def create
         @user = User.new(user_params)
 
-        @user.save
-        redirect_to @user
+        if @user.save
+            redirect_to @user
+        else
+            render 'new'
+        end
     end 
 
     def update
+        @user = User.find(params[:id])
+ 
+        if @user.update(user_params)
+            redirect_to @user
+        else
+            render 'edit'
+        end
     end 
 
     def destroy
@@ -28,6 +40,8 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:users).permit(:first_name, :last_name)
+        params.permit(:users).permit(:first_name, :last_name)
     end
 end
+#In the private class above, in order to get around the error I was encountering (according to stack overflow)
+#I changed params.require(:users) > params.permit(:users)
