@@ -8,3 +8,9 @@
     <strong>Delivery System</strong>
     <%= @user.pump_or_mdi %>
 </p>
+
+<strong>Does this look correct?</strong>
+<br>
+<%= link_to 'Edit', edit_user_path(@user) %>
+<br>
+<%= link_to 'Back to The Dashboard', users_path %><br>
