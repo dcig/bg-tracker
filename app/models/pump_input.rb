@@ -1,2 +1,0 @@
-class PumpInput < ApplicationRecord
-end

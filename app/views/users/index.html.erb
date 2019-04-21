@@ -7,14 +7,15 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Delivery Method</th>
-    <th></th>
+    <th>Delivery Methods</th>
   </tr>
  
   <% @users.each do |user| %>
     <tr>
       <td><%= user.first_name %></td>
       <td><%= user.last_name %></td>
+      <td><%= user.basal_insulin %></td>
+      <td><%= user.bolus_insulin %></td>
     </tr>
   <% end %>
 </table>

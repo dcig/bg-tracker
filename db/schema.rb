@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190421185932) do
+ActiveRecord::Schema.define(version: 20190421194452) do
 
-  create_table "basal_dose", force: :cascade do |t|
+  create_table "basal_doses", force: :cascade do |t|
     t.float "amount"
     t.time "time_stamp"
     t.datetime "created_at", null: false
