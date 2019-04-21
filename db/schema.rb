@@ -10,17 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190414172717) do
+ActiveRecord::Schema.define(version: 20190421185932) do
 
-  create_table "glucose_readings", force: :cascade do |t|
-    t.float "bg_value"
+  create_table "basal_dose", force: :cascade do |t|
+    t.float "amount"
     t.time "time_stamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "pump_inputs", force: :cascade do |t|
+  create_table "bolus_doses", force: :cascade do |t|
     t.float "amount"
+    t.time "timestamp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "glucose_readings", force: :cascade do |t|
+    t.float "bg_value"
     t.time "time_stamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -31,7 +38,6 @@ ActiveRecord::Schema.define(version: 20190414172717) do
     t.string "last_name"
     t.string "basal_insulin"
     t.string "bolus_insulin"
-    t.string "pump_or_mdi"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
