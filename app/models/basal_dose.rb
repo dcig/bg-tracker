@@ -1,0 +1,2 @@
+class BasalDose < ApplicationRecord
+end
