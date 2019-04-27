@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.permit(:users).permit(:first_name, :last_name)
+        params.permit(:users).permit(:first_name, :last_name, :basal_insulin, :bolus_insulin)
     end
 end
 #In the private class above, in order to get around the error I was encountering (according to stack overflow)
