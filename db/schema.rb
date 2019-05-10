@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190427191748) do
+ActiveRecord::Schema.define(version: 20190510124630) do
 
   create_table "basal_doses", force: :cascade do |t|
     t.float "amount"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20190427191748) do
 
   create_table "bolus_doses", force: :cascade do |t|
     t.float "amount"
-    t.time "timestamp"
+    t.time "time_stamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
