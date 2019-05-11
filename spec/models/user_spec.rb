@@ -41,7 +41,27 @@ RSpec.describe User do
       end
     end
 
-    it "can have many bolus doses"
+    context "bolus doses" do
+      it "can have many bolus doses" do
+        dose1 = BolusDose.create!(amount: 2, time_stamp: "12:00", user: user)
+        dose2 = BolusDose.create!(amount: 5, time_stamp: "12:00", user_id: user.id)
+
+        expect(user.bolus_doses).to match_array([dose1, dose2])
+      end
+
+      it "separates doses by user" do
+        dose1 = BolusDose.create!(amount: 2, time_stamp: "12:00", user: user)
+        dose2 = BolusDose.create!(amount: 5, time_stamp: "12:00", user_id: user.id)
+
+        other_user = User.create!(first_name: "John", last_name: "Connor")
+
+        other_user_dose1 = BolusDose.create!(amount: 12, time_stamp: "12:00", user: other_user)
+        other_user_dose2 = BolusDose.create!(amount: 15, time_stamp: "12:00", user_id: other_user.id)
+
+        expect(user.bolus_doses).to match_array([dose1, dose2])
+        expect(other_user.bolus_doses).to match_array([other_user_dose1, other_user_dose2])
+      end
+    end
 
     it "can have many glucose readings"
   end
