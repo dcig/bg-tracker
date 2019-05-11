@@ -1,14 +1,6 @@
 <h1>Edit Account Details</h1>
  
-<%= form_with scope: :users, url: users_path, local: true do |form| %>
-<!--<%= form_with(model: @user, local: true) do |form| %> I had this form_with previously, when you clicked update
-It would throw an error on my user_params private class in the users_controller.rb now it is functioning correctly after
-replacing with the updated form_with
-
-However one thing to note: Previously it showed what was originally input in the fields. Now it doesn't but still
-updates correctly so not sure if it matters or is worth fixing-->
-
- 
+ <%= form_with(model: @user, local: true) do |form| %>
   <p>
     <%= form.label :first_name %><br>
     <%= form.text_field :first_name %><br>
@@ -30,5 +22,3 @@ updates correctly so not sure if it matters or is worth fixing-->
 <% end %>
  
 <%= link_to 'Back', users_path %>
-
-<% end %>

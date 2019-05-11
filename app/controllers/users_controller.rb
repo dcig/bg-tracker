@@ -13,12 +13,6 @@ class UsersController < ApplicationController
 
     def edit
         @user = User.find(params[:id])
-
-        if @user.save
-            redirect_to @user
-        else
-            render 'new'
-        end
     end
 
     def create
@@ -33,6 +27,9 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
+        @user.update!(user_params)
+        
+        redirect_to @user
     end 
 
     def destroy
@@ -40,7 +37,7 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:users).permit(:first_name, :last_name, :basal_insulin, :bolus_insulin)
+        params.require(:user).permit(:first_name, :last_name, :basal_insulin, :bolus_insulin)
     end
 end
 #In the private class above, in order to get around the error I was encountering (according to stack overflow)
