@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe BolusDose do
-  it 'persists a bolus dose'
+  it 'persists a bolus dose' 
 
   describe "relationships" do
     it "belongs to a user" do
