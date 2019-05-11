@@ -63,6 +63,26 @@ RSpec.describe User do
       end
     end
 
-    it "can have many glucose readings"
+    context "glucose_readings" do
+      it "can have many glucose_readings" do
+        glucose_reading1 = GlucoseReading.create!(bg_value: 139, time_stamp: "12:00", user: user)
+        glucose_reading2 = GlucoseReading.create!(bg_value: 145, time_stamp: "12:00", user_id: user.id)
+
+        expect(user.glucose_readings).to match_array([glucose_reading1, glucose_reading2])
+      end
+
+      it "separates by user" do
+        glucose_reading1 = GlucoseReading.create!(bg_value: 139, time_stamp: "12:00", user: user)
+        glucose_reading2 = GlucoseReading.create!(bg_value: 145, time_stamp: "12:00", user_id: user.id)
+
+        other_user = User.create!(first_name: "John", last_name: "Connor")
+
+        other_user_glucose_reading1 = GlucoseReading.create!(bg_value: 175, time_stamp: "12:00", user: other_user)
+        other_user_glucose_reading2 = GlucoseReading.create!(bg_value: 180, time_stamp: "12:00", user_id: other_user.id)
+
+        expect(user.glucose_readings).to match_array([glucose_reading1, glucose_reading2])
+        expect(other_user.glucose_readings).to match_array([other_user_glucose_reading1, other_user_glucose_reading2])
+      end
+    end
   end
 end  
