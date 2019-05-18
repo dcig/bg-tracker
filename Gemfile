@@ -34,7 +34,8 @@ gem 'wdm', '~> 0.1.0', platforms: [:x64_mingw]
 # gem 'capistrano-rails', group: :development
 gem 'sidekiq'
 gem 'sinatra', github: 'sinatra/sinatra'
-
+#Devise gem below for user sign-in & Authentication
+gem 'devise'
 # When following the "how-to" on Dexcoms website, the article states to go to > https://github.com/nov/rack-oauth2 Because they 
 # they recommend using a pre-built client & server library. 
 #uninstalled for now

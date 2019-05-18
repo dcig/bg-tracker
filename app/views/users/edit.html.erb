@@ -1,5 +1,10 @@
 <h1>Edit Account Details</h1>
- 
+<strong>Here you will enter your basic information that the app needs for baseline tracking.</strong>
+
+<p>The app is designed to be user friendly with minimal interaction. It analyzes your blood sugar trends over time and looks for patterns. <br>
+These can be the default patterns or ones set by you. Once the app sees a pattern it starts to look at your sleep and health data. <br>
+These are then the insights that are provided to you. If you have good or bad blood sugars, what other than the obvious could be helping you? </p>
+
  <%= form_with(model: @user, local: true) do |form| %>
   <p>
     <%= form.label :first_name %><br>
@@ -21,4 +26,4 @@
  
 <% end %>
  
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', user_path %>

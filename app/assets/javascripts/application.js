@@ -21,4 +21,4 @@
 // original problem/answer > https://stackoverflow.com/questions/12520456/execjsruntimeerror-on-windows-trying-to-follow-rubytutorial
 
 //= require turbolinks
-//= require_tree .
+//= require_tree 
