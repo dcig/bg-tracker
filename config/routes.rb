@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  
   devise_for :users
   
   get 'welcome/index'
 
-  resources :users, only: [:edit, :update, :show]
+  resources :users, only: [:edit, :update, :show] do
+  resources :bolus_doses, only: [:new, :create] do
+  end
+  end
 
   root 'welcome#index'
 

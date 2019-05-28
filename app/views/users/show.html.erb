@@ -10,8 +10,6 @@
     <%= @user.bolus_insulin%>
 </p>
 
-<strong>Does this look correct?</strong>
+<%= link_to 'Back', welcome_index_path %>
 <br>
-<%= link_to 'Edit', edit_user_path(@user) %>
-<br>
-<%= link_to 'Yup! Back to The Dashboard', root_path %><br>
+<%= link_to 'Add a Bolus Dose', new_user_bolus_dose_path(@user) %>
