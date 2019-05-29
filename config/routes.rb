@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update, :show] do
   resources :bolus_doses, only: [:new, :create] do
   end
+  resources :basal_doses, only: [:new, :create] do
+  end
   end
 
   root 'welcome#index'
