@@ -1,0 +1,14 @@
+<%= form_for @basal_dose, url: user_basal_doses_url do |form| %>
+  <p>
+    <%= form.label :amount %><br>
+    <%= form.text_field :amount %><br>
+    <%= form.label :time_stamp %><br>
+    <%= form.text_field :time_stamp %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+ 
+<% end %>
+
