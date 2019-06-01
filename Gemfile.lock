@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/larskanis/sqlite3-ruby
+  revision: 1027509079176fcc4088dcc7638101cde617cf16
+  branch: add-gemspec
+  specs:
+    sqlite3 (1.3.13.20180326210955)
+
+GIT
   remote: https://github.com/sinatra/sinatra.git
   revision: f77a0d0baf62c634d089cbc2f0df60049002e247
   specs:
@@ -203,8 +210,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.3.13)
-    sqlite3 (1.3.13-x64-mingw32)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -254,7 +259,7 @@ DEPENDENCIES
   sinatra!
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3
+  sqlite3!
   therubyracer
   turbolinks (~> 5)
   tzinfo-data
@@ -263,4 +268,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.17.3
+   2.0.1
