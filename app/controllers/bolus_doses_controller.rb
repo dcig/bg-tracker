@@ -8,7 +8,8 @@ class BolusDosesController < ApplicationController
         @bolus_dose = BolusDose.create((bolus_dose_params).merge(user_id: current_user.id))
 
         if @bolus_dose.save
-            redirect_to '/welcome/index'
+            byebug
+            redirect_to User.show
         else
             render 'new'
         end
