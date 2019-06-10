@@ -19,6 +19,13 @@
       <%= dose.amount %>
     <% end %>
 </p>
+<p>
+    <strong>Recent Records</strong>
+    <% @user.basal_doses.each do |dose| %>
+      <%= dose.time_stamp.strftime("%l:%M%p").strip %>
+      <%= dose.amount %>
+    <% end %>
+</p>
 
 <%= link_to 'Back', welcome_index_path %>
 <br>
