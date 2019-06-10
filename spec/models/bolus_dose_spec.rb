@@ -3,6 +3,15 @@ require 'rails_helper'
 RSpec.describe BolusDose do
   it 'persists a bolus dose' 
 
+  it "fails to persist a bolus dose with an invalid timestamp" do
+    user = User.create!(first_name: "John", last_name: "Connor", email: "an@email.com", password: "password")
+ 
+    dose = BolusDose.new(amount: 1, time_stamp: "wrong", user: user)
+    dose.save
+    expect(dose).to_not be_valid
+    expect(dose).to_not be_persisted
+  end
+
   describe "relationships" do
     it "belongs to a user" do
       user = User.create!(first_name: "John", last_name: "Connor")

@@ -11,17 +11,22 @@
   <body>
   <div class="container">
     <% if user_signed_in? %>
-      Logged in as <strong><%= current_user.email %></strong>.
-      <%= link_to 'Edit settings', edit_user_registration_path, :class => 'navbar-link' %> |
-      <%= link_to 'Edit profile', edit_user_path(current_user.id), :class => 'navbar-link' %> |
-      <%= link_to "Logout", destroy_user_session_url, method: :delete, :class => 'navbar-link'  %>
+      <div>
+        Logged in as <strong><%= current_user.email %></strong>.
+        <%= link_to 'Edit settings', edit_user_registration_path, :class => 'navbar-link' %> |
+        <%= link_to 'Edit profile', edit_user_path(current_user.id), :class => 'navbar-link' %> |
+        <%= link_to "Logout", destroy_user_session_url, method: :delete, :class => 'navbar-link'  %>
+      </div>
     <% end %>
-      <% if notice %>
-         <p class="alert alert-success"><%= notice %></p>
-       <% end %>
-     <% if alert %>
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"> <%= value %></div>
+    <% end %>
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
-     <% end %>
+    <% end %>
     <%= yield %>
     </div>
   </body>
