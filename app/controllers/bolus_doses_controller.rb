@@ -8,8 +8,10 @@ class BolusDosesController < ApplicationController
         @bolus_dose = BolusDose.create((bolus_dose_params).merge(user_id: current_user.id))
 
         if @bolus_dose.save
-            redirect_to '/users/:id'
+            redirect_to current_user
         else
+            err = @bolus_dose.errors.first
+            flash[:danger] = "Error entering #{err[0]}, message: #{err[1]}."
             render 'new'
         end
     

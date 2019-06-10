@@ -8,7 +8,7 @@ class BasalDosesController < ApplicationController
         @basal_dose = BasalDose.create((basal_dose_params).merge(user_id: current_user.id))
 
         if @basal_dose.save
-            redirect_to '/users/:id'
+            redirect_to current_user
         else
             render 'new'
         end
