@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe GlucoseReading do
-  let(:user) do
-    user1 = create(:user)
-  end
+  let(:user) { create(:user) }
   
   it 'persists a glucose reading' do
     glucose_reading = GlucoseReading.new({ bg_value: 2, time_stamp: "11:00AM", user: user})
@@ -14,7 +12,7 @@ RSpec.describe GlucoseReading do
 
   describe "relationships" do
     it "belongs to a user" do
-      glucose_reading = GlucoseReading.create!(bg_value: 139, time_stamp: "15:00PM", user: user)
+      glucose_reading = create(:glucose_reading, user: user)
 
       expect(glucose_reading.user).to eq(user)
     end
@@ -28,13 +26,13 @@ RSpec.describe GlucoseReading do
 
   context "bg_value" do
     it 'may be set as a string' do
-      glucose_reading = GlucoseReading.create!({ bg_value: "2", time_stamp: "11:00AM", user: user})
+      glucose_reading = create(:glucose_reading, bg_value: "2")
 
       expect(glucose_reading.bg_value).to eq(2)
     end
 
     it "does not truncate a decimal" do
-      glucose_reading = GlucoseReading.create!({ bg_value: "9.78", time_stamp: "11:00AM", user: user})
+      glucose_reading = create(:glucose_reading, bg_value: 9.78)
 
       expect(glucose_reading.bg_value).to eq(9.78)
     end
