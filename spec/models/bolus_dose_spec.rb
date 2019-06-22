@@ -14,8 +14,8 @@ RSpec.describe BolusDose do
 
   describe "relationships" do
     it "belongs to a user" do
-      user = User.create!(first_name: "John", last_name: "Connor")
-      dose = BolusDose.create!(amount: 1, time_stamp: "15:00", user: user)
+      user = User.create!(first_name: "John", last_name: "Connor", email: "johnconner@gmail.com", password: "password")
+      dose = BolusDose.create!(amount: 1, time_stamp: "15:00PM", user: user)
 
       expect(dose.user).to eq(user)
     end

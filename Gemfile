@@ -44,7 +44,6 @@ gem 'devise'
 # they recommend using a pre-built client & server library. 
 #uninstalled for now
 #gem 'jruby-openssl', '~> 0.7'
-gem "factory_bot_rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
