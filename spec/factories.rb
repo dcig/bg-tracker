@@ -4,6 +4,7 @@ FactoryBot.define do
       last_name  { "Doe" }
       basal_insulin  { "Tresiba" }
       bolus_insulin  { "Novolog" }
-      admin { false }
+      email {"johndoe@gmail.com"}
+      password {"password"}
     end
   end

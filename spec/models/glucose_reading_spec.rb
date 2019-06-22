@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe GlucoseReading do
   let(:user) do
-    User.create!(first_name: "John", last_name: "Connor", email: "an@email.com", password: "password")
+    user1 = create(:user)
   end
   
   it 'persists a glucose reading' do
