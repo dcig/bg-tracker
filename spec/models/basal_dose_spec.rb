@@ -1,10 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe BasalDose do
-  it 'persists a basal dose'
+  let(:user) { create(:user) }
+
+  it 'persists a basal dose' do
+    dose = BasalDose.new(amount: 1, time_stamp: "1:00PM", user: user)
+    dose.save
+  end
 
   it "fails to persist a bolus dose with an invalid timestamp" do
-    user = User.create!(first_name: "John", last_name: "Connor", email: "an@email.com", password: "password")
+    user = create(:user)
  
     dose = BasalDose.new(amount: 1, time_stamp: "wrong", user: user)
     dose.save
@@ -14,7 +19,7 @@ RSpec.describe BasalDose do
 
   describe "relationships" do
     it "belongs to a user" do
-      user = User.create!(first_name: "John", last_name: "Connor", email: "johnconner@gmail.com", password: "password")
+      user = create(:user)
       dose = BasalDose.create!(amount: 1, time_stamp: "15:00PM", user: user)
 
       expect(dose.user).to eq(user)
@@ -26,4 +31,4 @@ RSpec.describe BasalDose do
       end.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
-end  
+end
