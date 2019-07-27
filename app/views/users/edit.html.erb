@@ -1,10 +1,15 @@
 <div class="container">
+<div class="row">
+<div class="col-sm-6">
 <h1>Edit Account Details</h1>
 <strong>Here you will enter your basic information that the app needs for baseline tracking.</strong>
-
-<p>The app is designed to be user friendly with minimal interaction. It analyzes your blood sugar trends over time and looks for patterns. <br>
-These can be the default patterns or ones set by you. Once the app sees a pattern it starts to look at your sleep and health data. <br>
-These are then the insights that are provided to you. If you have good or bad blood sugars, what other than the obvious could be helping you? </p>
+<hr>
+<p>The app is designed to be user friendly with minimal interaction. It analyzes your blood sugar trends over time and looks for patterns.
+<br>
+These can be the default patterns or ones set by you. Once the app sees a pattern it starts to look at your sleep and health data.
+<br>
+These are then the insights that are provided to you. If you have good or bad blood sugars, what other than the obvious could be helping you?
+</p>
 
  <%= form_with(model: @user, local: true) do |form| %>
   <p>
@@ -31,5 +36,11 @@ These are then the insights that are provided to you. If you have good or bad bl
 <br>
 <%= link_to 'Add a Basal Dose', new_user_basal_dose_path(@user) %>
 <br>
+<%= link_to 'Link Dexcom Account', new_user_basal_dose_path(@user) %>
+<br>
+<%= link_to 'Link FitBit Account', new_user_basal_dose_path(@user) %>
+<br>
 <%= link_to 'Back', user_path %>
+</div>
+</div>
 </div>
