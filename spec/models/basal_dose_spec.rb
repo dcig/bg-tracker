@@ -10,9 +10,9 @@ RSpec.describe BasalDose do
   end
 
   it "fails to persist a bolus dose with an invalid timestamp" do
-    user = create(:user)
+    user = create(:user, email: "john@gmail.com")
  
-    dose = create(:basal_dose, time_stamp: "wrong")
+    dose = create(:basal_dose, time_stamp: "3:00")
     dose.save
     expect(dose).to_not be_valid
     expect(dose).to_not be_persisted
@@ -20,7 +20,7 @@ RSpec.describe BasalDose do
 
   describe "relationships" do
     it "belongs to a user" do
-      user = create(:user)
+      other_user = create(:user, email: "johnny@gmail.com")
       dose = create(:basal_dose)
 
       expect(dose.user).to eq(user)
