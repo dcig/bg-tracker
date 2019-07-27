@@ -12,26 +12,41 @@
     <%= @user.basal_insulin%>
     <%= @user.bolus_insulin%>
 </p>
-
+<div class="row">
+<div class="col-sm-4">
 <p>
-    <strong>Recent Records</strong>
+    <strong>Recent Bolus'</strong> <br>
      <% @user.bolus_doses.each do |dose| %>
       <%= dose.time_stamp.strftime("%l:%M%p").strip %>
+      <br>
       <%= dose.amount %>
     <% end %>
 </p>
+</div>
+<div class="col-sm-4">
 <p>
-    <strong>Recent Records</strong>
+    <strong>Basal Records</strong> <br>
     <% @user.basal_doses.each do |dose| %>
-      <%= dose.time_stamp.strftime("%l:%M%p").strip %>
+      <%= dose.time_stamp.strftime("%l:%M%p").strip %> <br>
       <%= dose.amount %>
     <% end %>
 </p>
-
+</div>
+<div class="col-sm-4">
+<p>
+    <strong>Recent BGs</strong> <br>
+     <% @user.glucose_readings.each do |glucose_reading| %>
+      <%= glucose_reading.time_stamp.strftime("%l:%M%p").strip %>
+      <br>
+      <%= glucose_reading.amount %>
+    <% end %>
+</p>
+</div>
+</div>
+<hr>
 <%= link_to 'Back', welcome_index_path %>
 <br>
 <%= link_to 'Add a Bolus Dose', new_user_bolus_dose_path(@user) %>
 <br>
 <%= link_to 'Add a Basal Dose', new_user_basal_dose_path(@user) %>
-
 </div>
