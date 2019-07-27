@@ -36,7 +36,7 @@ These are then the insights that are provided to you. If you have good or bad bl
 <br>
 <%= link_to 'Add a Basal Dose', new_user_basal_dose_path(@user) %>
 <br>
-<%= link_to 'Link Dexcom Account', new_user_basal_dose_path(@user) %>
+<%= link_to 'Link Dexcom Account', "#{ENV['DEXCOM_URL']}/v2/oauth2/login?client_id=#{ENV['DEXCOM_ID']}&redirect_uri=#{ENV['DEXCOM_REDIRECT']}&response_type=code&scope=offline_access" %>
 <br>
 <%= link_to 'Link FitBit Account', new_user_basal_dose_path(@user) %>
 <br>
