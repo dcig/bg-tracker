@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe GlucoseReading do
   let(:user) { create(:user) }
-  
+
   it 'persists a glucose reading' do
     glucose_reading = GlucoseReading.new({ bg_value: 2, time_stamp: "11:00AM", user: user})
     glucose_reading.save!
