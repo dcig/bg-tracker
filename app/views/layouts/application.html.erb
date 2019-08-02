@@ -18,7 +18,7 @@
         <%= link_to "Logout", destroy_user_session_url, method: :delete, :class => 'navbar-link'  %>
       </div>
     <% end %>
-  <% flash.each do |key, value| %>
+     <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>"> <%= value %></div>
     <% end %>
     <% if notice %>

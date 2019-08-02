@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190612130213) do
+ActiveRecord::Schema.define(version: 20190729120651) do
 
   create_table "basal_doses", force: :cascade do |t|
     t.float "amount"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20190612130213) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "dexcom_authorization_code"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

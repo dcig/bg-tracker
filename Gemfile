@@ -40,6 +40,8 @@ gem 'sidekiq'
 gem 'sinatra', github: 'sinatra/sinatra'
 #Devise gem below for user sign-in & Authentication
 gem 'devise'
+
+gem 'dotenv-rails'
 # When following the "how-to" on Dexcoms website, the article states to go to > https://github.com/nov/rack-oauth2 Because they 
 # they recommend using a pre-built client & server library. 
 #uninstalled for now
