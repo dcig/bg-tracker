@@ -16,19 +16,18 @@
 <div class="col-sm-4">
 <p>
     <strong>Recent Bolus'</strong> <br>
-     <% @user.bolus_doses.each do |dose| %>
-      <%= dose.time_stamp.strftime("%l:%M%p").strip %>
-      <br>
-      <%= dose.amount %>
+    <% @user.bolus_doses.order(id: :desc).limit(6).each do |dose| %>
+      <%= dose.amount %>u - 
+      <%= dose.time_stamp.strftime("%l:%M%p").strip %><br>
     <% end %>
 </p>
 </div>
 <div class="col-sm-4">
 <p>
     <strong>Basal Records</strong> <br>
-    <% @user.basal_doses.each do |dose| %>
-      <%= dose.time_stamp.strftime("%l:%M%p").strip %> <br>
-      <%= dose.amount %>
+    <% @user.basal_doses.order(id: :desc).limit(4).each do |dose| %>
+      <%= dose.amount %>u - 
+      <%= dose.time_stamp.strftime("%l:%M%p").strip %><br>
     <% end %>
 </p>
 </div>

@@ -9,6 +9,7 @@ class BolusDosesController < ApplicationController
 
         if @bolus_dose.save
             redirect_to current_user
+            flash['success'] = 'Bolus dose added.'
         else
             err = @bolus_dose.errors.first
             flash[:danger] = "Error entering #{err[0]}, message: #{err[1]}."

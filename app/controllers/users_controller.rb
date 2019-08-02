@@ -20,7 +20,6 @@ class UsersController < ApplicationController
         if current_user.save
             redirect_to current_user
             flash['success'] = 'Congrats! Your Dexcom account is connected'
-            
         else
             redirect_to current_user
             flash['alert'] = 'Try again, please. :) Your Dexcom account did not connect'
