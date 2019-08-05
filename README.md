@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Insulin and Blood Glucose tracking app.
 
-Things you may want to cover:
+Goal is to create a product/service/tool that enables Type1 Diabetics to understand how key variables affect their overall blood sugar levels. 
 
-* Ruby version
+Users can determine a specific "Good Blood Sugar" range. Over time, the app records CGM readings and then displays fitness and health data that may have played a role in the "Good Blood Sugar" range. In addition, it will track the display for the opposite, "Bad Blood Sugar" range. 
 
-* System dependencies
+Key points of app:
 
-* Configuration
+* Utilizing sandbox data - SandboxUser5
 
-* Database creation
+* G6 Mobile App
+* Data exists from 2018-02-15 to 2018-04-15
 
-* Database initialization
+* Using Ruby and Rails 
 
-* How to run the test suite
+* Developing on Microsoft Surface Pro4 
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* All devices - desktop, Android & IOs
