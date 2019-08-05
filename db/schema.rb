@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190729120651) do
+ActiveRecord::Schema.define(version: 20190805125218) do
 
   create_table "basal_doses", force: :cascade do |t|
     t.float "amount"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20190729120651) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+  end
+
+  create_table "dexcom_access_tokens", force: :cascade do |t|
+    t.string "access_token"
+    t.integer "expires_in"
+    t.string "refresh_token"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "glucose_readings", force: :cascade do |t|
