@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     end 
 
     def dexcom_token
-        current_user.update!(dexcom_authorization_code: params)
+        current_user.update!(dexcom_authorization_code: params[:code])
 
         if current_user.save
             redirect_to current_user

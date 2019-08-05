@@ -45,10 +45,6 @@
 <hr>
 <%= link_to 'Back', welcome_index_path %>
 <br>
-<% if flash['success'] %>
-<%= link_to 'Add Recent BGs', "#{ENV['DEXCOM_URL']}/v2/oauth2/login?client_id=#{ENV['DEXCOM_ID']}&redirect_uri=#{ENV['DEXCOM_REDIRECT']}&response_type=code&scope=offline_access" %>
-<% end %>
-<br>
 <%= link_to 'Add a Bolus Dose', new_user_bolus_dose_path(@user) %>
 <br>
 <%= link_to 'Add a Basal Dose', new_user_basal_dose_path(@user) %>
