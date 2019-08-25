@@ -31,7 +31,3 @@ class UsersController < ApplicationController
         params.require(:user).permit(:first_name, :last_name, :basal_insulin, :bolus_insulin)
     end
 end
-#In the private class above, in order to get around the error I was encountering (according to stack overflow)
-#I changed params.require(:users) > params.permit(:users)
-#As of 5/10/19 I changed user_params to params.require and now my data that is being input via fields on the user creation
-#is displaying - No errors so far navigating through the app
