@@ -44,18 +44,31 @@ module Dexcom
 
         def create_token!
             require 'rest-client'
+            require 'json'
 
-            RestClient.post "https://sandbox-api.dexcom.com/v2/oauth2/token", {'x' => 1}.to_json, {content_type: :json, accept: :json}
-
-#{ENV['DEXCOM_URL']}/v2/oauth2/login?client_id=#{ENV['DEXCOM_ID']}&redirect_uri=#{ENV['DEXCOM_REDIRECT']}&response_type=code&scope=offline_access
             # use the dexcom client id, client secret, user's authorization token
             # to make an api request to dexcom
             # https://sandbox-api.dexcom.com/v2/oauth2/token (see postman)
-            # retrive access_token, refresh_token, expires_in
-            #  make an api request to the token endpoint.  It needs:
+            
+            # POST or PUT with a hash sends parameters as a urlencoded form body
+            RestClient.post "https://sandbox-api.dexcom.com/v2/oauth2/token",
+                {:client_id => ENV['DEXCOM_ID'],
+                    :client_secret => ENV['DEXCOM_SECRET'],
+                    :code => 'authcode5',
+                    :grant_type => 'authorization_code',
+                    :redirect_uri => ENV['DEXCOM_REDIRECT']}
+            #  retrive access_token, refresh_token, expires_in
+            #  make an api request to the token endpoint. 
+            #  It needs:
             #  params -- see the "params" we send in postman
-            #  headeers -- see the "headers" we send in postman
-            # create a new DexcomAccessToken with that info & related to this user
+            #  headers -- see the "headers" we send in postman
+            response = RestClient.get "https://sandbox-api.dexcom.com/v2/oauth2/token", {accept: :json}
+            respone.body
+            puts response.read_body
+
+
+
+            #  create a new DexcomAccessToken with that info & related to this user
 
             # return that token
         end
