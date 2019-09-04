@@ -12,6 +12,8 @@ module Dexcom
         end
 
         def access_token
+            
+
             token = current_access_token!
 
             if expired?(access_token)
@@ -24,7 +26,7 @@ module Dexcom
         private
 
         def current_access_token! 
-
+            
             @user.token.access_token
             
             if 
@@ -66,6 +68,15 @@ module Dexcom
                 #"token_type": "Bearer"
             #}
 
+            #def as_json(*)
+                #data = {
+                    #"access_token":user.access_token,
+                    #"refresh_token":user.refresh_token,
+                    #"expires_in":user.expires_in,
+                    #"token_type":user.token_type
+                #}
+            #end
+
             #  retrive access_token, refresh_token, expires_in
             #  make an api request to the token endpoint. 
             #  It needs:
@@ -85,8 +96,11 @@ module Dexcom
             respone.body
             puts response.read_body
         end
-
         def refresh_token!(refresh_token)
+            response = RestClient.get "https://sandbox-api.dexcom.com/v2/oauth2/token", {accept: :json}
+            json = JSON.parse(response)
+            json['code'] = response.code
+
         end
     end
 end
