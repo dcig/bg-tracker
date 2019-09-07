@@ -8,17 +8,18 @@ module Dexcom
 
         attr_reader :user
         def initialize(user)
-            @user = user
+            @user = User.find(1)
         end
 
         def access_token
-            token = token.access_token
+            token.access_token = current_access_token
                 
             elsif 
 
-            refresh_token! if expired?(access_token)
+            refresh_token! if expired?(current_access_token)
             # token is an instance of the DexcomAccessToken model
             # token.access_token
+            end
         end
 
         private
@@ -66,6 +67,7 @@ module Dexcom
             @user.update!(dexcom_authorization_code: :access_token)
             # create a new DexcomAccessToken with that info & related to this user
             # return that token
+            current_access_token = :access_token if @user.save!(:access_token)
 
         end
         def refresh_token!(refresh_token)
@@ -89,9 +91,9 @@ module Dexcom
                 # \"refresh_token\": \"{your_refresh_token}\"
                 # }"
             oauth_payload = JSON.parse(response.body, symbolize_names: true)
-            access_token = oauth_payload[:access_token]
+            refresh_token = oauth_payload[:refresh_token]
 
-            @user.update!(dexcom_authorization_code: :access_token)
+            @user.update!(dexcom_authorization_code: :refresh_token)
 
         end
     end
