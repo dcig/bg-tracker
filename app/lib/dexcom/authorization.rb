@@ -44,7 +44,15 @@ module Dexcom
 
         def expired?(token)
             # based on token expiration and created at, return true/false if token is expired
-            false
+            token_time = Time.at(@user.created_at.to_i)
+
+            if token.expires_in && (token.created_at <= token_time)
+                #expires_in is_7_seconds_older_than token.created_at 
+                refresh_token!(token)
+            else
+                false
+            end
+
         end
 
         def create_token!
@@ -75,13 +83,10 @@ module Dexcom
         end
 
         def refresh_token!(token)
-            require 'rest-client'
-            require 'json'
-
             body = {
                 :client_id => ENV['DEXCOM_ID'],
                 :client_secret => ENV['DEXCOM_SECRET'],
-                :refresh_token => 'refreshtoken5',
+                :refresh_token => @user.refresh_token,
                 :grant_type => 'refresh_token',
                 :redirect_uri => ENV['DEXCOM_REDIRECT']
               }
@@ -95,10 +100,13 @@ module Dexcom
                 # \"refresh_token\": \"{your_refresh_token}\"
                 # }"
             oauth_payload = JSON.parse(response.body, symbolize_names: true)
-            refresh_token = oauth_payload[:refresh_token]
 
-            @user.update!(dexcom_authorization_code: :refresh_token)
-
+            DexcomAccessToken.update!(
+                access_token: oauth_payload[:access_token],
+                expires_in: oauth_payload[:expires_in],
+                refresh_token: oauth_payload[:refresh_token],
+                user: @user
+            )
         end
     end
 end
