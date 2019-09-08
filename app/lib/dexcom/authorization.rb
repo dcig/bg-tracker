@@ -1,3 +1,6 @@
+require 'rest-client'
+require 'json'
+
 module Dexcom
     class Authorization
 
@@ -8,47 +11,47 @@ module Dexcom
 
         attr_reader :user
         def initialize(user)
-            @user = User.find(1)
+            @user = user
         end
 
         def access_token
-            token.access_token = current_access_token
-                
-            elsif 
+            token = current_access_token!
 
-            refresh_token! if expired?(current_access_token)
+            refresh_token!(token) if expired?(token)
             # token is an instance of the DexcomAccessToken model
-            # token.access_token
-            end
+            token.access_token
         end
 
         private
         def current_access_token! 
             # User "has one" dexcom access token
-            # 1.  Use the user model and retrieve the latest access token
+            # 1.  Use the user model and retrieve the latest access tokena
             # 2.  If no token has ever been created, create one
             # call create_token!
-            current_access_token = @user.token.access_token
+
+            # return @user.dexcom_access_token if @user.dexcom_access_token.present?
+            #
+            # create_token!
+
+            current_access_token = @user.dexcom_access_token
             
-            if 
-                User.find(current_access_token)
+            if current_access_token.present?
+                return current_access_token
             else
-                token = create_token!(token)
+                return create_token!
             end
         end
 
         def expired?(token)
             # based on token expiration and created at, return true/false if token is expired
+            false
         end
 
         def create_token!
-            require 'rest-client'
-            require 'json'
-
             body = {
                 :client_id => ENV['DEXCOM_ID'],
                 :client_secret => ENV['DEXCOM_SECRET'],
-                :code => 'authcode5',
+                :code => @user.dexcom_authorization_code,
                 :grant_type => 'authorization_code',
                 :redirect_uri => ENV['DEXCOM_REDIRECT']
               }
@@ -62,15 +65,16 @@ module Dexcom
                 # \"refresh_token\": \"{your_refresh_token}\"
                 # }"
             oauth_payload = JSON.parse(response.body, symbolize_names: true)
-            access_token = oauth_payload[:access_token]
 
-            @user.update!(dexcom_authorization_code: :access_token)
-            # create a new DexcomAccessToken with that info & related to this user
-            # return that token
-            current_access_token = :access_token if @user.save!(:access_token)
-
+            DexcomAccessToken.create!(
+                access_token: oauth_payload[:access_token],
+                expires_in: oauth_payload[:expires_in],
+                refresh_token: oauth_payload[:refresh_token],
+                user: @user
+            )
         end
-        def refresh_token!(refresh_token)
+
+        def refresh_token!(token)
             require 'rest-client'
             require 'json'
 
