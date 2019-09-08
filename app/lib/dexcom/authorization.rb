@@ -44,9 +44,13 @@ module Dexcom
 
         def expired?(token)
             # based on token expiration and created at, return true/false if token is expired
-            token_time = Time.at(@user.created_at.to_i)
-
-            if token.expires_in && (token.created_at <= token_time)
+            #created_at: "2019-05-16 02:29:14"
+            t = token.expires_in
+            token_time = Time.at(t).utc.strftime("%H:%M:%S")
+            #"00:10:00"
+            expired_token_time = (token_time + token.created_at.strftime("%H:%M:S"))
+            #"02:39:14"
+            if expired_token_time  (token.created_at <= token_time)
                 #expires_in is_7_seconds_older_than token.created_at 
                 refresh_token!(token)
             else
