@@ -48,10 +48,9 @@ module Dexcom
             t = token.expires_in
             token_time = Time.at(t).utc.strftime("%H:%M:%S")
             #"00:10:00"
-            expired_token_time = (token_time + token.created_at.strftime("%H:%M:S"))
+            expired_token_time = (token_time + token.created_at.utc.strftime("%H:%M:S"))
             #"02:39:14"
-            if expired_token_time  (token.created_at <= token_time)
-                #expires_in is_7_seconds_older_than token.created_at 
+            if expired_token_time >= Time.now.utc.strftime("%H:%M:%S")
                 refresh_token!(token)
             else
                 false
