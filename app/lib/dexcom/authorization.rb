@@ -1,3 +1,6 @@
+require 'rest-client'
+require 'json'
+
 module Dexcom
     class Authorization
 
@@ -14,53 +17,99 @@ module Dexcom
         def access_token
             token = current_access_token!
 
-            if expired?(access_token)
-                token = refresh_token!(token)
-            end
-
+            refresh_token!(token) if expired?(token)
             # token is an instance of the DexcomAccessToken model
-            # token.access_token
+            token.access_token
         end
+
         private
-
         def current_access_token! 
-
-            @user.token.access_token
-            
-            if 
-                user.find(current_access_token)
-            else
-                token = create_token!(token)
-            end
             # User "has one" dexcom access token
-            # 1.  Use the user model and retrieve the latest access token
+            # 1.  Use the user model and retrieve the latest access tokena
             # 2.  If no token has ever been created, create one
             # call create_token!
+
+            # return @user.dexcom_access_token if @user.dexcom_access_token.present?
+            #
+            # create_token!
+
+            current_access_token = @user.dexcom_access_token
+            
+            if current_access_token.present?
+                return current_access_token
+            else
+                return create_token!
+            end
         end
 
         def expired?(token)
             # based on token expiration and created at, return true/false if token is expired
+            #created_at: "2019-05-16 02:29:14"
+            t = token.expires_in
+            token_time = Time.at(t).utc.strftime("%H:%M:%S")
+            #"00:10:00"
+            expired_token_time = (token_time + token.created_at.utc.strftime("%H:%M:S"))
+            #"02:39:14"
+            if expired_token_time >= Time.now.utc.strftime("%H:%M:%S")
+                refresh_token!(token)
+            else
+                false
+            end
+
         end
 
         def create_token!
-            require 'rest-client'
+            body = {
+                :client_id => ENV['DEXCOM_ID'],
+                :client_secret => ENV['DEXCOM_SECRET'],
+                :code => @user.dexcom_authorization_code,
+                :grant_type => 'authorization_code',
+                :redirect_uri => ENV['DEXCOM_REDIRECT']
+              }
+            # POST or PUT with a hash sends parameters as a urlencoded form body
+            response = RestClient.post("https://sandbox-api.dexcom.com/v2/oauth2/token", body)
+            puts response.body
+                # "{
+                # \"access_token\": \"{your_access_token}\",
+                # \"expires_in\": 600,
+                # \"token_type\": \"Bearer\",
+                # \"refresh_token\": \"{your_refresh_token}\"
+                # }"
+            oauth_payload = JSON.parse(response.body, symbolize_names: true)
 
-            RestClient.post "https://sandbox-api.dexcom.com/v2/oauth2/token", {'x' => 1}.to_json, {content_type: :json, accept: :json}
-
-#{ENV['DEXCOM_URL']}/v2/oauth2/login?client_id=#{ENV['DEXCOM_ID']}&redirect_uri=#{ENV['DEXCOM_REDIRECT']}&response_type=code&scope=offline_access
-            # use the dexcom client id, client secret, user's authorization token
-            # to make an api request to dexcom
-            # https://sandbox-api.dexcom.com/v2/oauth2/token (see postman)
-            # retrive access_token, refresh_token, expires_in
-            #  make an api request to the token endpoint.  It needs:
-            #  params -- see the "params" we send in postman
-            #  headeers -- see the "headers" we send in postman
-            # create a new DexcomAccessToken with that info & related to this user
-
-            # return that token
+            DexcomAccessToken.create!(
+                access_token: oauth_payload[:access_token],
+                expires_in: oauth_payload[:expires_in],
+                refresh_token: oauth_payload[:refresh_token],
+                user: @user
+            )
         end
 
-        def refresh_token!(refresh_token)
+        def refresh_token!(token)
+            body = {
+                :client_id => ENV['DEXCOM_ID'],
+                :client_secret => ENV['DEXCOM_SECRET'],
+                :refresh_token => @user.refresh_token,
+                :grant_type => 'refresh_token',
+                :redirect_uri => ENV['DEXCOM_REDIRECT']
+              }
+            # POST or PUT with a hash sends parameters as a urlencoded form body
+            response = RestClient.post("https://sandbox-api.dexcom.com/v2/oauth2/token", body)
+            puts response.body
+                # "{
+                # \"access_token\": \"{your_access_token}\",
+                # \"expires_in\": 600,
+                # \"token_type\": \"Bearer\",
+                # \"refresh_token\": \"{your_refresh_token}\"
+                # }"
+            oauth_payload = JSON.parse(response.body, symbolize_names: true)
+
+            DexcomAccessToken.update!(
+                access_token: oauth_payload[:access_token],
+                expires_in: oauth_payload[:expires_in],
+                refresh_token: oauth_payload[:refresh_token],
+                user: @user
+            )
         end
     end
 end

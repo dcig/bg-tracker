@@ -45,6 +45,11 @@ gem 'dotenv-rails'
 
 gem 'rest-client'
 #gem 'jruby-openssl', '~> 0.7'
+gem 'mime-types', '~> 3.2', '>= 3.2.2'
+gem 'netrc', '~> 0.11.0'
+gem 'http-accept', '~> 2.1'
+gem 'http-cookie', '~> 1.0', '>= 1.0.3'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
