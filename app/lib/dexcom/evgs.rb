@@ -15,17 +15,54 @@ module Dexcom
         end
 
         def dexcom_bg!
+            #GET request for bg values
             access_token = Dexcom::Authorization.new(@user).access_token
-            #Normally, when you use RestClient.get or the lower level RestClient::Request.execute method: :get to retrieve data, 
-            #the entire response is buffered in memory and returned as the response to the call.
-            body = {
-                :client_id => ENV['DEXCOM_ID'],
-                :client_secret => ENV['DEXCOM_SECRET'],
-                :refresh_token => @user.refresh_token,
-                :grant_type => 'refresh_token',
-                :redirect_uri => ENV['DEXCOM_REDIRECT']
-              }
-            response = RestClient.get "https://sandbox-api.dexcom.com/v2/oauth2/token", {accept: :json}
+            response = RestClient.get 'https://sandbox-api.dexcom.com/v2/users/self/egvs?startDate=2017-06-16T17:00:00&endDate=2017-06-16T17:15:00', {Authorization: => 'Bearer access_token', accept: :json}
+            puts response.body
 
+            evgs_payload = JSON.parse(response.body, symbolize_names: true)
+
+            GlucoseReading.create!(
+                access_token: oauth_payload[:access_token],
+                expires_in: oauth_payload[:expires_in],
+                refresh_token: oauth_payload[:refresh_token],
+                user: @user
+            )
+           # {
+           #     "unit": "mg/dL",
+           #     "rateUnit": "mg/dL/min",
+           #     "egvs": [
+           #        {
+           #             "systemTime": "2017-06-16T17:10:00",
+           #             "displayTime": "2017-06-16T09:10:00",
+           #             "value": 183,
+           #             "status": null,
+           #             "trend": "flat",
+           #             "trendRate": 0.4,
+           #             "realtimeValue": 183,
+           #             "smoothedValue": null
+           #         },
+           #         {
+           #             "systemTime": "2017-06-16T17:05:00",
+           #             "displayTime": "2017-06-16T09:05:00",
+           #             "value": 181,
+           #             "status": null,
+           #             "trend": "flat",
+           #             "trendRate": 0.5,
+           #             "realtimeValue": 181,
+           #             "smoothedValue": null
+           #         },
+           #         {
+           #             "systemTime": "2017-06-16T17:00:00",
+           #             "displayTime": "2017-06-16T09:00:00",
+           #             "value": 179,
+           #             "status": null,
+           #             "trend": "flat",
+           #             "trendRate": 0.6,
+           #             "realtimeValue": 179,
+           #             "smoothedValue": null
+           #         }
+           #     ]
+           # }
     end
 end

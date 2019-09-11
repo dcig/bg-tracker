@@ -48,9 +48,9 @@ module Dexcom
             t = token.expires_in
             token_time = Time.at(t).utc.strftime("%H:%M:%S")
             #"00:10:00"
-            expired_token_time = (token_time + token.created_at.utc.strftime("%H:%M:S"))
+            expired_token_time = (token_time + (token.created_at.utc.strftime("%H:%M:S")))
             #"02:39:14"
-            if expired_token_time >= Time.now.utc.strftime("%H:%M:%S")
+            if expired_token_time <= Time.now.utc.strftime("%H:%M:%S")
                 refresh_token!(token)
             else
                 false
@@ -84,7 +84,6 @@ module Dexcom
                 user: @user
             )
         end
-
         def refresh_token!(token)
             body = {
                 :client_id => ENV['DEXCOM_ID'],
