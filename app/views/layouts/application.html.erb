@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Diabefree</title>
+    <title>dcig beetus</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,25 +9,81 @@
   </head>
 
 <body>
-  <div class="appSkeleton">
-    <% if user_signed_in? %>
-      <div class="nav">
-        Logged in as <strong><%= current_user.email %></strong>.
-        <%= link_to 'Edit settings', edit_user_registration_path, :class => 'navbar-link' %> |
-        <%= link_to 'Edit profile', edit_user_path(current_user.id), :class => 'navbar-link' %> |
-        <%= link_to "Logout", destroy_user_session_url, method: :delete, :class => 'navbar-link'  %>
-      </div>
-    <% end %>
-     <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"> <%= value %></div>
-    <% end %>
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    <%= yield %>
+  <header>
+  <!-- Dropdown Structure -->
+  <% if user_signed_in? %>
+  <ul id="dropdown1" class="dropdown-content">
+      <li><%= link_to 'Edit settings', edit_user_registration_path %></li>
+      <li><%= link_to 'Edit profile', edit_user_path(current_user.id) %></li>
+      <li class="divider"></li>
+      <li><%= link_to "Logout", destroy_user_session_url, method: :delete  %></li>
+    </ul>
+    <ul id="dropdown2" class="dropdown-content">
+      <li><%= link_to 'Edit settings', edit_user_registration_path %></li>
+      <li><%= link_to 'Edit profile', edit_user_path(current_user.id) %></li>
+      <li class="divider"></li>
+      <li><%= link_to "Logout", destroy_user_session_url, method: :delete  %></li>
+      <% end %>
+    </ul>
     </div>
+      <nav>
+        <div class="container">
+          <div class="nav-wrapper">
+            <a href="#" class="brand-logo right">sulii</a>
+              <% if user_signed_in? %>
+              <div>
+                hey <strong><%= current_user.email %></strong>
+              <% end %>
+              <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+              <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li><a href="#">Highlights</a></li>
+                <li><a href="#">Seco Bloks</a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Profile<i class="material-icons right">arrow_drop_down</i></a></li>
+              </ul>
+              <ul class="sidenav" id="mobile-demo">
+                <li><a href="#">Highlights</a></li>
+                <li><a href="#">Seco Bloks</a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Profile<i class="material-icons right">arrow_drop_down</i></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    <main>
+      <div class="container">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"> <%= value %></div>
+        <% end %>
+      <%= yield %>
+      </div>
+    </header>
+
+    </main>
+    </div>
+    <footer class="page-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="white-text">sulii</h5>
+              <p class="grey-text text-lighten-4">A new approach to utilizing our sugar data.<br>
+              Thanks to Dexcom & Fitbit for allowing developers to extend their platforms for free.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+              <h5 class="white-text">App Information</h5>
+              <ul>
+                <li><a class="grey-text text-lighten-3" href="#!">Devices</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Ecosystem</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">About</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+          © 2019 Copyright sulii
+          <a class="grey-text text-lighten-4 right" href="#!">Privacy Policy</a>
+          </div>
+        </div>
+      </footer>
   </body>
 </html> 

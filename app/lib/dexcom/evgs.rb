@@ -45,3 +45,8 @@ module Dexcom
            # }
     end
 end
+
+
+
+
+https://www.getpostman.com/collections/a5a16d77f8e4174db928

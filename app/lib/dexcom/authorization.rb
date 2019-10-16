@@ -14,7 +14,7 @@ module Dexcom
             @user = user
         end
 
-        def access_token
+        def access_token(token)
             token = current_access_token!
 
             refresh_token!(token) if expired?(token)
