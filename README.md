@@ -14,10 +14,13 @@ Key points of app:
 * G6 Mobile App
 * Data exists from 2018-02-15 to 2018-04-15
 
-* Developing with Ruby and Rails 
-* Rspec for testing, RESTful API practices for consuming data via json payload
+* Tech Stack
+* Ruby and Rails 
+* Rspec for testing, RESTful API practices for consuming data via json payload (REST:Client gem)
+* Sass, JS, Materialize, React/React Native
+* Postman, Postgres
 * MVC architecture with standard CRUD operations
 
-* Developing on Microsoft Surface Pro4 
+* Developing on Microsoft Surface Pro4 + PC Desktop
 
-* All devices - desktop, Android & IOs - Plan to utilize RubyMotion 
+* All devices - desktop, Android & IOs - React + React Native
