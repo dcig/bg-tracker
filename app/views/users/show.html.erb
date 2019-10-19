@@ -13,8 +13,9 @@
     <%= @user.basal_insulin%>
     <%= @user.bolus_insulin%>
 </p>
+<div class="divider"></div>
 <div class="row">
-<div class="col-sm-4">
+<div class="col s4">
 <p>
     <strong>Recent Bolus'</strong> <br>
     <% @user.bolus_doses.order(id: :desc).limit(6).each do |dose| %>
@@ -23,7 +24,7 @@
     <% end %>
 </p>
 </div>
-<div class="col-sm-4">
+<div class="col s4">
 <p>
     <strong>Basal Records</strong> <br>
     <% @user.basal_doses.order(id: :desc).limit(4).each do |dose| %>
@@ -32,7 +33,7 @@
     <% end %>
 </p>
 </div>
-<div class="col-sm-4">
+<div class="col s4">
 <p>
     <strong>Recent BGs</strong> <br>
      <% @user.glucose_readings.each do | reading| %>
@@ -43,12 +44,17 @@
 </p>
 </div>
 </div>
-<hr>
-<%= link_to 'Back', welcome_index_path %>
-<br>
+<div class="row">
+<div class="col s4">
 <%= link_to 'Add a Bolus Dose', new_user_bolus_dose_path(@user) %>
-<br>
+</div>
+<div class="col s4">
 <%= link_to 'Add a Basal Dose', new_user_basal_dose_path(@user) %>
+</div>
+<div class="col s4">
+<%= link_to 'Back', welcome_index_path %>
+</div>
+</div>
 <br>
 
 </div>
