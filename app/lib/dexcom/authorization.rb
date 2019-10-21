@@ -7,17 +7,17 @@ module Dexcom
         # Can test in rails console:
         # user = User.find(1)
         # auth = Dexcom::Authorization.new(user)
-        # auth.access_token
+        # auth.access_token(user)
 
         attr_reader :user
         def initialize(user)
             @user = user
         end
 
-        def access_token(token)
+        def access_token(user)
             token = current_access_token!
 
-            refresh_token!(token) if expired?(token)
+            refresh_token!(user) if expired?(user)
             # token is an instance of the DexcomAccessToken model
             token.access_token
         end
@@ -42,7 +42,7 @@ module Dexcom
             end
         end
 
-        def expired?(token)
+        def expired?(user)
             # based on token expiration and created at, return true/false if token is expired
             #created_at: "2019-05-16 02:29:14"
             t = token.expires_in
@@ -51,7 +51,7 @@ module Dexcom
             expired_token_time = (token_time + (token.created_at.utc.strftime("%H:%M:S")))
             #"02:39:14"
             if expired_token_time <= Time.now.utc.strftime("%H:%M:%S")
-                refresh_token!(token)
+                refresh_token!(user.token)
             else
                 false
             end
@@ -84,11 +84,12 @@ module Dexcom
                 user: @user
             )
         end
+
         def refresh_token!(token)
             body = {
                 :client_id => ENV['DEXCOM_ID'],
                 :client_secret => ENV['DEXCOM_SECRET'],
-                :refresh_token => @user.refresh_token,
+                :refresh_token => user.refresh_token,
                 :grant_type => 'refresh_token',
                 :redirect_uri => ENV['DEXCOM_REDIRECT']
               }
