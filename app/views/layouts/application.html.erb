@@ -29,7 +29,7 @@
       <nav>
         <div class="container">
           <div class="nav-wrapper">
-            <a href="#" class="brand-logo right">sulii</a>
+            <a href="#" class="brand-logo right">seco</a>
               <% if user_signed_in? %>
               <div>
                 hey <strong><%= current_user.email %></strong>
@@ -48,6 +48,7 @@
             </div>
           </div>
         </nav>
+      </header>
     <main>
       <div class="container">
         <% flash.each do |key, value| %>
@@ -55,24 +56,22 @@
         <% end %>
       <%= yield %>
       </div>
-    </header>
-
     </main>
-    </div>
+    
     <footer class="page-footer">
         <div class="container">
           <div class="row">
             <div class="col l6 s12">
-              <h5 class="white-text">sulii</h5>
+              <h5 class="white-text">seco</h5>
               <p class="grey-text text-lighten-4">A new approach to utilizing our sugar data.<br>
               Thanks to Dexcom & Fitbit for allowing developers to extend their platforms for free.</p>
             </div>
             <div class="col l4 offset-l2 s12">
-              <h5 class="white-text">App Information</h5>
+              <h5 class="white-text">About seco</h5>
               <ul>
                 <li><a class="grey-text text-lighten-3" href="#!">Devices</a></li>
                 <li><a class="grey-text text-lighten-3" href="#!">Ecosystem</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">About</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Contribute</a></li>
                 <li><a class="grey-text text-lighten-3" href="#!">Contact</a></li>
               </ul>
             </div>
@@ -80,7 +79,7 @@
         </div>
         <div class="footer-copyright">
           <div class="container">
-          © 2019 Copyright sulii
+          © 2019 Copyright seco.design
           <a class="grey-text text-lighten-4 right" href="#!">Privacy Policy</a>
           </div>
         </div>
