@@ -9,6 +9,9 @@ module Dexcom
         # auth = Dexcom::Authorization.new(user)
         # auth.access_token(user)
 
+        # token is an instance of the DexcomAccessToken model
+        # token.access_token
+
         attr_reader :user
         def initialize(user)
             @user = user
@@ -17,9 +20,8 @@ module Dexcom
         def access_token(token)
             token = current_access_token!
 
-            refresh_token!(token) if expired?(token)
-            # token is an instance of the DexcomAccessToken model
-            # token.access_token
+            # refresh_token!(token) if expired?(token)
+            
         end
 
         private
@@ -33,7 +35,7 @@ module Dexcom
             #
             # create_token!
 
-            current_access_token = @user.dexcom_access_token
+            current_access_token = user.dexcom_access_token.access_token
             
             if current_access_token.present?
                 return current_access_token
@@ -45,7 +47,7 @@ module Dexcom
         def expired?(token)
             # based on token expiration and created at, return true/false if token is expired
             #created_at: "2019-05-16 02:29:14"
-            t = token.expires_in
+            t = user.dexcom_access_token.expires_in
             token_time = Time.at(t).utc.strftime("%H:%M:%S")
             #"00:10:00"
             expired_token_time = (token_time + (token.created_at.utc.strftime("%H:%M:S")))
