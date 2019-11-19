@@ -1,5 +1,4 @@
 
-<div class="container">
 <div class="content">
 
 <p>
@@ -36,10 +35,9 @@
 <div class="col s4">
 <p>
     <strong>Recent BGs</strong> <br>
-     <% @user.glucose_readings.each do | reading| %>
-      <%= reading.time_stamp.strftime("%l:%M%p").strip %>
-      <br>
+     <% @user.glucose_readings.each do | reading | %>
       <%= reading.amount %>
+      <%= reading.time_stamp.strftime("%l:%M%p").strip %>
     <% end %>
 </p>
 </div>
@@ -57,5 +55,4 @@
 </div>
 <br>
 
-</div>
 </div>
