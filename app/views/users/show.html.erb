@@ -36,7 +36,7 @@
 <p>
     <strong>Recent BGs</strong> <br>
      <% @user.glucose_readings.each do | reading | %>
-      <%= reading.amount %>
+      <%= reading.bg_value %>
       <%= reading.time_stamp.strftime("%l:%M%p").strip %>
     <% end %>
 </p>

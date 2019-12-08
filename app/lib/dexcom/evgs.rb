@@ -10,14 +10,18 @@ module Dexcom
             @authorization = auth
         end
 
-        def authorization
-            auth = Dexcom::Authorization.new(@user)
+        def authorization(auth)
+            auth = Dexcom::Authorization.new(user)
         end
 
         def dexcom_bg!
-            #GET request for bg values
-            access_token = Dexcom::Authorization.new(@user).access_token
-            response = RestClient.get 'https://sandbox-api.dexcom.com/v2/users/self/egvs?startDate=2017-06-16T17:00:00&endDate=2017-06-16T17:15:00', {Authorization: => 'Bearer access_token', accept: :json}
+            #GET request for bg_value
+            #{authorization: {type: 'Bearer' {access_token}}
+            access_token = auth.access_token(user)
+            header = {
+                :authorization => 'Bearer {access_token}'
+            }
+            response = RestClient.get('https://sandbox-api.dexcom.com/v2/users/self/egvs?startDate=2017-06-16T17:00:00&endDate=2017-06-16T17:15:00', header) 
             puts response.body
 
             evgs_payload = JSON.parse(response.body, symbolize_names: true)
