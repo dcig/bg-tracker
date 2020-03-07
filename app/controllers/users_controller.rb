@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     def dexcom_token
         current_user.update!(dexcom_authorization_code: params[:code])
 
-        if current_user.save1
+        if current_user.save!
             redirect_to current_user
             dexcom_token = Dexcom::Authorization.new(@user.create_token!)
             flash['success'] = 'Congrats! Your Dexcom account is connected'
