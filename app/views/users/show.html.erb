@@ -16,7 +16,7 @@
 <div class="row">
 <div class="col s4">
 <p>
-    <strong>Recent Bolus'</strong> <br>
+    <strong>Recent Bolus</strong> <br>
     <% @user.bolus_doses.order(id: :desc).limit(6).each do |dose| %>
       <%= dose.amount %>u - 
       <%= dose.time_stamp.strftime("%l:%M%p").strip %><br>
